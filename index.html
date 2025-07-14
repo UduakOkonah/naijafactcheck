@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NaijaFactCheck – Fake News Filter</title>
+  <link rel="stylesheet" href="styles/basic.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script src="script/script.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <h1 class="logo">NaijaFactCheck</h1>
+
+    <nav>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+    </nav>
+
+        <!-- Hamburger Menu Icon -->
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Backdrop for mobile menu -->
+    <div class="nav-backdrop" id="navBackdrop"></div>
+  </header>
+  <main class="container">
+  <section class="hero">
+    <span id="greetUser"></span>
+    <div class="hero-text slide-in">
+      <h1>🛑 Stop Fake News in Seconds</h1>
+      <p>Paste any WhatsApp message. We'll analyze it and let you know if it's real or fake.</p>
+      <a href="#checker" class="btn-primary">Try It Now</a>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/564/564445.png" alt="Fake News Illustration" class="hero-img fade-in" />
+  </section>
+
+  <main class="container" id="checker">
+    <section class="checker-box">
+      <h2>🕵️‍♀️ Paste the Message:</h2>
+      <textarea id="messageInput" placeholder="e.g. Click here to get ₦20,000 FG palliative..."></textarea>
+      <button id="checkBtn">Analyze Now</button>
+    </section>
+
+    <section id="resultBox" class="result hidden fade-up">
+      <h3>🔍 Result:</h3>
+      <div id="resultBadge" class="badge"></div>
+      <p id="resultExplanation"></p>
+    </section>
+
+    <section id="how" class="how-section">
+      <h2>🔧 How It Works</h2>
+      <ol>
+        <li>We scan the message for red flags: scam words, suspicious links, fake alert patterns.</li>
+        <li>A custom scoring logic determines credibility.</li>
+        <li>You see the result with a badge and explanation.</li>
+      </ol>
+    </section>
+
+    <section id="join" class="cta-section">
+      <h2>🚀 Join the Fight Against Fake News</h2>
+      <p>Share this tool with friends and stop misinformation one message at a time.</p>
+      <a href="#" class="btn-secondary">Share Now</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with 💚 by Uduakobong Okonah | #My3MTT Showcase 2025</p>
+  </footer>
+</body>
+</html>

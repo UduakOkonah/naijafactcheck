@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <title>About Us – NaijaFactCheck</title>
+   <link rel="stylesheet" href="styles/about.css">
+  <link rel="stylesheet" href="styles/basic.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script src="script/script.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <h1 class="logo">NaijaFactCheck</h1>
+
+    <nav>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+    </nav>
+
+        <!-- Hamburger Menu Icon -->
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Backdrop for mobile menu -->
+    <div class="nav-backdrop" id="navBackdrop"></div>
+  </header>
+
+  <main class="about-container">
+    <section class="intro-section fade-in">
+      <div class="intro-text">
+        <h1>About NaijaFactCheck</h1>
+        <br>
+        <p>
+          Fake news spreads faster than truth. NaijaFactCheck was created to empower everyday Nigerians to easily verify WhatsApp messages, political claims, viral news, and scams — right from their browser.
+        </p>
+        <p>
+          Using AI scoring, keyword detection, and JSON-based APIs, we simulate a smart fact-checking assistant. This project was built for the 3MTT Knowledge Showcase.
+        </p>
+      </div>
+      <div class="intro-img">
+        <img src="https://cdn-icons-png.flaticon.com/512/6165/6165746.png" alt="AI Detection Illustration">
+      </div>
+    </section>
+
+    <section class="mission-section fade-in">
+      <h2>🎯 Our Mission</h2>
+      <div class="mission-grid">
+        <div class="card">
+          <h3>👁️‍🗨️ Awareness</h3>
+          <p>Expose the patterns behind deceptive WhatsApp broadcasts, political propaganda, and scam trends.</p>
+        </div>
+        <div class="card">
+          <h3>🛡️ Simplicity</h3>
+          <p>Anyone with a phone and internet should be able to check a message in seconds — no login or stress required.</p>
+        </div>
+        <div class="card">
+          <h3>🤖 AI + Community</h3>
+          <p>We combine AI logic and keyword filtering with local knowledge of Nigerian misinformation tactics.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tech-section fade-in">
+      <h2>🧠 How It Works</h2>
+      <p>
+        Messages are analyzed based on red-flag keywords (e.g., “Click here”, “FG palliative”), shortened links (like bit.ly), and suspicious patterns. Gemini AI (free version) and simulated API responses are used to mimic advanced features without heavy costs.
+      </p>
+    </section>
+
+    <section class="callout-section fade-in">
+      <h2>🙌 Built by a Missionary Learner</h2>
+      <p>
+        Created by Uduakobong Okonah, a Nigerian missionary learner passionate about software development and using tech for truth. This is more than a project — it's a mission to fight disinformation.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 NaijaFactCheck | Made with 💚 for 3MTT Showcase</p>
+  </footer>
+</body>
+</html>

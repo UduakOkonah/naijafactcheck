@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login or Signup – NaijaFactCheck</title>
+  <link rel="stylesheet" href="styles/login.css" />
+</head>
+<body>
+  <main class="login-container">
+    <!-- Left image section -->
+    <section class="left-side">
+      <img src="assets/login.png" alt="Chat Security Illustration" />
+    </section>
+
+    <!-- Right form section -->
+    <section class="right-side">
+      <h1 class="app-title">NaijaFactCheck</h1>
+      <p class="tagline">Your WhatsApp Fake News Filter</p>
+
+    <div class="form-switcher">
+        <button id="showLoginBtn" class="active" aria-pressed="true">Login</button>
+        <button id="showSignupBtn" aria-pressed="false">Sign Up</button>
+    </div>
+
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" aria-label="Login form">
+        <h2>Welcome Back</h2>
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="Enter your username" required />
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Your password" required />
+
+        <button type="submit">Login</button>
+        <p id="loginError" class="error-msg" role="alert" aria-live="polite"></p>
+      </form>
+
+      <!-- SIGNUP FORM -->
+      <form id="signupForm" aria-label="Signup form" hidden>
+        <h2>Create Account</h2>
+
+        <label for="signupUsername">Username</label>
+        <input type="text" id="signupUsername" placeholder="Choose a username" required />
+
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" placeholder="Your email" required />
+
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" placeholder="Create a password" required />
+
+        <label for="signupConfirmPassword">Confirm Password</label>
+        <input type="password" id="signupConfirmPassword" placeholder="Repeat your password" required />
+
+        <button type="submit">Sign Up</button>
+        <p id="signupError" class="error-msg" role="alert" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="script/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources – NaijaFactCheck</title>
+  <link rel="stylesheet" href="styles/basic.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script src="script/script.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <h1 class="logo">NaijaFactCheck</h1>
+
+    <nav>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+    </nav>
+
+        <!-- Hamburger Menu Icon -->
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Backdrop for mobile menu -->
+    <div class="nav-backdrop" id="navBackdrop"></div>
+  </header>
+   <main class="container">
+    <section class="hero fade-in">
+      <h2>🧠 Fake News Awareness Hub</h2>
+      <p>Explore trusted tools, smart tips, and ways to report fake news — all in one place.</p>
+    </section>
+
+    <section class="resource-grid">
+      <!-- Trusted Fact-Checking Sites -->
+      <div class="resource-card">
+        <h3>🔗 Trusted Fact-Checking Sites</h3>
+        <ul>
+          <li><a href="https://dubawa.org" target="_blank">Dubawa Nigeria</a></li>
+          <li><a href="https://africacheck.org" target="_blank">AfricaCheck</a></li>
+          <li><a href="https://factcheck.afp.com" target="_blank">AFP Fact Check</a></li>
+          <li><a href="https://check.whatsapp.com" target="_blank">WhatsApp Check</a></li>
+        </ul>
+      </div>
+
+      <!-- Tips to Spot Fake News -->
+      <div class="resource-card">
+        <h3>👀 Spot Fake News Fast</h3>
+        <ul>
+          <li>Avoid messages with urgent language like “Act Now!” or “Share to 10 people.”</li>
+          <li>Look out for suspicious links like <code>bit.ly</code> or <code>tinyurl</code>.</li>
+          <li>Cross-check the claim using Google or official news sources.</li>
+          <li>Fake giveaways and palliatives are red flags.</li>
+        </ul>
+      </div>
+    </section>
+
+    
+    <section class="resource-section">
+      <h3>📌 Red Flags To Watch</h3>
+      <p>Here’s a list of common phrases our AI filters use to detect suspicious messages:</p>
+      <div class="badge-list">
+        <span class="badge">"Click here"</span>
+        <span class="badge">"Free giveaway"</span>
+        <span class="badge">"Urgent update"</span>
+        <span class="badge">"FG Palliative"</span>
+        <span class="badge">bit.ly</span>
+        <span class="badge">"Cash prize"</span>
+        <span class="badge">"Share to 5 groups"</span>
+      </div>
+    </section>
+    
+    <section class="resource-section future-section fade-in">
+    <h3>🚀 Coming Soon: WhatsApp Integration</h3>
+    <p>We're building a browser extension or WhatsApp-friendly shortcut that will:</p>
+    <ul>
+        <li>📲 Let you fact-check WhatsApp messages without leaving the app</li>
+        <li>🔗 Instantly copy suspicious messages and get AI analysis in 1 click</li>
+        <li>💬 Enable community voting on whether a message is true or fake</li>
+    </ul>
+    </section>
+
+
+    <!-- Report Section -->
+    <section class="report-box">
+      <h3>🚩 Report a Suspicious Message</h3>
+      <p>If you received a strange message on WhatsApp, help us verify it.</p>
+      <p>📧 <a href="mailto:report@naijafactcheck.ng?subject=Suspicious%20Message%20Report">report@naijafactcheck.ng</a></p>
+      <p style="font-size: 0.9rem; color: #555;">We don’t store personal info. All reports are anonymous.</p>
+    </section>
+  </main>
+  <footer>
+    <p>Made with 💚 by Uduakobong Okonah | #My3MTT Showcase 2025</p>
+  </footer>
+</body>
+</html>
