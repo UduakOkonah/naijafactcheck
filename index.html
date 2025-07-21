@@ -6,7 +6,7 @@
   <title>NaijaFactCheck – Fake News Filter</title>
   <link rel="stylesheet" href="styles/basic.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <script src="script/script.js" defer></script>
+  <script type="module" src="script/script.js" defer></script>
 </head>
 <body>
   <header class="navbar">
@@ -43,17 +43,26 @@
   </section>
 
   <main class="container" id="checker">
-    <section class="checker-box">
-      <h2>🕵️‍♀️ Paste the Message:</h2>
-      <textarea id="messageInput" placeholder="e.g. Click here to get ₦20,000 FG palliative..."></textarea>
-      <button id="checkBtn">Analyze Now</button>
-    </section>
+<section class="checker-box">
+  <h2>🕵️‍♀️ Paste the Message:</h2>
+  <textarea id="messageInput" placeholder="e.g. Click here to get ₦20,000 FG palliative..."></textarea>
+  
+  <!-- This message shows while scam data is loading -->
+  <p id="loadingMsg">⏳ Loading scam data...</p>
 
-    <section id="resultBox" class="result hidden fade-up">
-      <h3>🔍 Result:</h3>
-      <div id="resultBadge" class="badge"></div>
-      <p id="resultExplanation"></p>
-    </section>
+  <!-- The button is initially disabled in JS -->
+  <button id="checkBtn" disabled>Analyze Now</button>
+</section>
+
+
+  <section id="resultBox" class="result hidden fade-up">
+  <h3>🔍 Result:</h3>
+  <div id="resultBadge" class="badge"></div>
+  <p id="resultExplanation"></p>
+</section>
+
+<section id="aiSuggestionBox" class="hidden ai-box fade-in"></section>
+
 
     <section id="how" class="how-section">
       <h2>🔧 How It Works</h2>
@@ -63,7 +72,7 @@
         <li>You see the result with a badge and explanation.</li>
       </ol>
     </section>
-
+    
     <section id="join" class="cta-section">
       <h2>🚀 Join the Fight Against Fake News</h2>
       <p>Share this tool with friends and stop misinformation one message at a time.</p>

@@ -1,50 +1,191 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // === FAKE NEWS ANALYZER ===
-  const checkBtn = document.getElementById("checkBtn");
-  if (checkBtn) {
-    checkBtn.addEventListener("click", analyzeMessage);
+import { simulateAIAnalysis } from './ai-sim.js';
+import { analyzeWithHuggingFace } from './huggingface.js';
 
-    function analyzeMessage() {
-      const message = document.getElementById("messageInput").value.toLowerCase();
-      const resultBox = document.getElementById("resultBox");
-      const resultBadge = document.getElementById("resultBadge");
-      const explanation = document.getElementById("resultExplanation");
+let scamPhrases = [];
+const checkBtn = document.getElementById("checkBtn");
+const loadingMsg = document.getElementById("loadingMsg");
 
-      const fakeWords = ["click here", "urgent", "free", "giveaway", "palliative", "share to", "cash prize"];
-      const spamLinks = ["bit.ly", "tinyurl", "whatsappstatus"];
+if (checkBtn) checkBtn.disabled = true;
 
-      let score = 0;
+// Load scam phrases
+fetch('./data/scam_phrases_nigeria_2000.json')
+  .then(response => response.json())
+  .then(data => {
+    scamPhrases = data.phrases || [];
+    checkBtn.disabled = false;
+    loadingMsg.style.display = 'none';
+  })
+  .catch(err => {
+    console.error("❌ Error loading scam phrases:", err);
+    scamPhrases = [];
+  });
 
-      fakeWords.forEach(word => {
-        if (message.includes(word)) score += 2;
-      });
 
-      spamLinks.forEach(link => {
-        if (message.includes(link)) score += 3;
-      });
+  fetch('./data/scam_messages_nigeria.json')
+  .then(res => res.json())
+  .then(messages => {
+    messages.forEach(msg => {
+      const result = simulateAIAnalysis(msg);
+      console.log("📩 Message:", msg);
+      console.log("🧠 AI Suggestion:", result.suggestion);
+      console.log("🔎 Confidence:", result.confidence);
+      console.log("===========");
+    });
+  })
+  .catch(err => console.error("Failed to load messages:", err));
 
-      let label = "✅ Credible";
-      let explanationText = "Message appears neutral and safe.";
-      let colorClass = "result-green";
+function mapLabel(label) {
+  const tag = label.toUpperCase();
 
-      if (score >= 6) {
-        label = "❌ Likely Fake";
-        explanationText = "Message contains scammy keywords and suspicious links.";
-        colorClass = "result-red";
-      } else if (score >= 3) {
-        label = "⚠️ Suspicious";
-        explanationText = "Message has warning signs. Verify before sharing.";
-        colorClass = "result-yellow";
-      }
+  // Handle Hugging Face labels
+  if (tag === "LABEL_1") return "❌ Scam or Spam";
+  if (tag === "LABEL_0") return "✅ Legitimate";
 
-      resultBadge.textContent = label;
-      resultBadge.className = colorClass;
-      explanation.textContent = explanationText;
-      resultBox.classList.remove("hidden");
-    }
+  // For other models or label types
+  const lowerTag = label.toLowerCase();
+  if (["spam", "toxic", "offensive", "inappropriate"].includes(lowerTag)) {
+    return "❌ Scam or Spam";
   }
 
-  // === MOBILE NAVIGATION ===
+  if (["ham", "legit", "neutral"].includes(lowerTag)) {
+    return "✅ Legitimate";
+  }
+
+  return "⚠️ Unknown";
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!checkBtn) return;
+
+  
+  // Set up history buttons outside of checkBtn click
+  const showHistoryBtn = document.getElementById("showHistoryBtn");
+  const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+
+  if (showHistoryBtn) {
+    showHistoryBtn.addEventListener("click", () => {
+      console.log("📖 Button clicked");
+      renderHistory();
+    });
+  }
+
+  if (clearHistoryBtn) {
+    clearHistoryBtn.addEventListener("click", () => {
+      clearHistory();
+    });
+  }
+
+  checkBtn.addEventListener("click", async () => {
+    const message = document.getElementById("messageInput").value.toLowerCase();
+    const resultBox = document.getElementById("resultBox");
+    const resultBadge = document.getElementById("resultBadge");
+    const explanation = document.getElementById("resultExplanation");
+    const aiBox = document.getElementById("aiSuggestionBox");
+
+
+    aiBox.innerHTML = ""; // Clear previous AI results
+
+    const spamLinks = [
+      "bit.ly", "tinyurl.com", "t.co", "goo.gl", "ow.ly", "is.gd", "shorte.st", "adf.ly",
+      "rebrand.ly", "lnkd.in", "linktr.ee", "whatsappstatus", "wa.me", "myaccounthere.com",
+      "grabreward.ng", "govtcredit.site", "nairapromo.xyz", "claimgift.org", "rechargeoffer.me",
+      "promohub.ng", "winreward.site", "nairawin.org", "appgiveaway.com", "tiktokrewards.xyz",
+      "federalgrant.info", "easyalert.org", "quickcash.site", "cbnpromo.ng", "govupdates.today",
+      "urgentfund.site", "freeairtime.me", "ngcashhub.com", "9jarewards.info", "loandash.xyz",
+      "scam-checker.com", "gbapps.download", "rewardclaim.net", "t.me/updates", "telegramgroup.xyz",
+      "freegift.ng", "cashlink.site", "xbit.ly", "creditlink.org", "govhelpdesk.site",
+      "airtimevoucher.net", "dashrewards.xyz", "whatsappbonus.com", "claimpage.site",
+      "redirectlink.xyz", "mobilereward.org", "alerts.ng", "grantclaim.org", "fundalert.me",
+      "scamdealz.com", "getdatabundle.ng", "fakeupdate.site", "flashrewardz.xyz",
+      "reward.ng", "quicklink.click", "joinnow.site", "promo.win", "fakeclaim.net"
+    ];
+
+    // Run local simulated AI
+    const aiResult = simulateAIAnalysis(message);
+
+    // Score-based detection
+    let score = 0;
+    const cleanMsg = message.replace(/[^\w\s₦]/gi, '').toLowerCase();
+
+    scamPhrases.forEach(word => {
+      if (cleanMsg.includes(word.toLowerCase())) {
+        console.log("✅ Matched scam phrase:", word);
+        score += 2;
+      }
+    });
+
+    score += spamLinks.some(link => cleanMsg.includes(link)) ? 3 : 0;
+
+    let label = "✅ Credible";
+    let explanationText = "Message appears neutral and safe.";
+    let colorClass = "result-green";
+
+    if (score >= 6) {
+      label = "❌ Likely Fake";
+      explanationText = "Message contains scammy keywords and suspicious links.";
+      colorClass = "result-red";
+    } else if (score >= 3) {
+      label = "⚠️ Suspicious";
+      explanationText = "Message has warning signs. Verify before sharing.";
+      colorClass = "result-yellow";
+    }
+
+    // Local AI override
+    if (aiResult.flag && label === "✅ Credible") {
+      label = "⚠️ AI-Flagged";
+      explanationText = "AI flagged this as potentially misleading. Review carefully.";
+      colorClass = "result-yellow";
+    }
+
+    // Update UI
+    resultBadge.textContent = label;
+    resultBadge.className = colorClass;
+    explanation.textContent = explanationText;
+    resultBox.classList.remove("hidden");
+
+    // Show Local AI (Simulated)
+    aiBox.innerHTML += `
+      <h4>🧠 Local AI (Simulated)</h4>
+      <p><strong>Confidence:</strong> ${aiResult.confidence || "N/A"}</p>
+      <p>${aiResult.suggestion}</p>
+    `;
+
+    // Hugging Face Analysis
+    try {
+      const hfAnalysis = await analyzeWithHuggingFace(message);
+      const rawLabel = hfAnalysis.top.label;
+      const mappedLabel = mapLabel(rawLabel);
+
+      console.log("📥 Hugging Face raw:", hfAnalysis);
+      console.log("📌 Top Label:", rawLabel);
+
+      aiBox.innerHTML += `
+        <h4>🤖 Hugging Face AI</h4>
+        <p><strong>Label:</strong> ${mappedLabel}</p>
+        <p><strong>Confidence:</strong> ${(hfAnalysis.top.score * 100).toFixed(2)}%</p>
+        <p style="font-size: 0.85em; color: gray;">Raw label: ${rawLabel}</p>
+      `;
+
+      // Use Hugging Face as backup flag
+      if (["spam", "scam", "toxic"].includes(rawLabel.toLowerCase()) && label === "✅ Credible") {
+        resultBadge.textContent = "⚠️ AI-Flagged";
+        resultBadge.className = "result-yellow";
+        explanation.textContent += " | ⚠️ Hugging Face flagged this as scam/spam.";
+      }
+    } catch (error) {
+      console.error("Hugging Face API error:", error);
+      aiBox.innerHTML += `<p>❌ Hugging Face API error</p>`;
+    }
+    aiBox.classList.remove("hidden");
+
+  // After analysis is complete
+  saveToHistory(message, label, hfAnalysis?.top?.score ? (hfAnalysis.top.score * 100).toFixed(2) + "%" : "N/A");
+  });
+});
+
+
+  // === MOBILE NAV ===
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
   const navBackdrop = document.getElementById('navBackdrop');
@@ -65,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === LOGGED-IN USER UI ===
+  // === USER UI ===
   const greetUser = document.getElementById('greetUser');
   const currentUser = localStorage.getItem('naijaUsername');
 
@@ -77,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     greetUser.textContent = `👋 Hello, ${currentUser}`;
   }
 
-  // === LOGOUT BUTTON ===
+  // === LOGOUT ===
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
@@ -85,4 +226,12 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'login.html';
     });
   }
-});
+  const showHistoryBtn = document.getElementById("showHistoryBtn");
+  if (showHistoryBtn) {
+    showHistoryBtn.addEventListener("click", renderHistory);
+  }
+
+  const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+  if (clearHistoryBtn) {
+    clearHistoryBtn.addEventListener("click", clearHistory);
+  }
