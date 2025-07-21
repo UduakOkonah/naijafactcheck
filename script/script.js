@@ -58,24 +58,6 @@ function mapLabel(label) {
 document.addEventListener('DOMContentLoaded', () => {
   if (!checkBtn) return;
 
-  
-  // Set up history buttons outside of checkBtn click
-  const showHistoryBtn = document.getElementById("showHistoryBtn");
-  const clearHistoryBtn = document.getElementById("clearHistoryBtn");
-
-  if (showHistoryBtn) {
-    showHistoryBtn.addEventListener("click", () => {
-      console.log("📖 Button clicked");
-      renderHistory();
-    });
-  }
-
-  if (clearHistoryBtn) {
-    clearHistoryBtn.addEventListener("click", () => {
-      clearHistory();
-    });
-  }
-
   checkBtn.addEventListener("click", async () => {
     const message = document.getElementById("messageInput").value.toLowerCase();
     const resultBox = document.getElementById("resultBox");
@@ -101,48 +83,80 @@ document.addEventListener('DOMContentLoaded', () => {
       "reward.ng", "quicklink.click", "joinnow.site", "promo.win", "fakeclaim.net"
     ];
 
-    // Run local simulated AI
+      // Score-based detection
+  let score = 0;
+  const cleanMsg = message.replace(/[^\w\s₦]/gi, '').toLowerCase();
+
+  scamPhrases.forEach(word => {
+    if (cleanMsg.includes(word.toLowerCase())) {
+      console.log("✅ Matched scam phrase:", word);
+      score += 2;
+    }
+  });
+
+  score += spamLinks.some(link => cleanMsg.includes(link)) ? 3 : 0;
+
+  let label = "✅ Credible";
+  let explanationText = "Message appears neutral and safe.";
+  let colorClass = "result-green";
+
+  if (score >= 6) {
+    label = "❌ Likely Fake";
+    explanationText = "Message contains scammy keywords and suspicious links.";
+    colorClass = "result-red";
+  } else if (score >= 3) {
+    label = "⚠️ Suspicious";
+    explanationText = "Message has warning signs. Verify before sharing.";
+    colorClass = "result-yellow";
+  }
+
+  // Try Hugging Face First
+  try {
+    const hfAnalysis = await analyzeWithHuggingFace(message);
+    const rawLabel = hfAnalysis.top.label;
+    const mappedLabel = mapLabel(rawLabel);
+    const hfConfidence = hfAnalysis.top.score;
+    const hfIsScam = rawLabel.toLowerCase() === "label_1" || ["scam", "spam", "toxic"].includes(rawLabel.toLowerCase());
+
+    console.log("📥 Hugging Face raw:", hfAnalysis);
+
+    aiBox.innerHTML += `
+      <h4>🤖 Hugging Face AI</h4>
+      <p><strong>Label:</strong> ${mappedLabel}</p>
+      <p><strong>Confidence:</strong> ${(hfConfidence * 100).toFixed(2)}%</p>
+      <p style="font-size: 0.85em; color: gray;">Raw label: ${rawLabel}</p>
+    `;
+
+    if (hfIsScam && hfConfidence >= 0.7) {
+      label = "❌ Likely Fake";
+      explanationText = "Hugging Face AI flagged this as scam/spam with high confidence.";
+      colorClass = "result-red";
+    }
+
+  } catch (error) {
+    console.error("⚠️ Hugging Face API error. Falling back to local AI...", error);
+
     const aiResult = simulateAIAnalysis(message);
 
-    // Score-based detection
-    let score = 0;
-    const cleanMsg = message.replace(/[^\w\s₦]/gi, '').toLowerCase();
+    aiBox.innerHTML += `
+      <h4>🧠 Local AI (Simulated)</h4>
+      <p><strong>Confidence:</strong> ${aiResult.confidence || "N/A"}</p>
+      <p>${aiResult.suggestion}</p>
+    `;
 
-    scamPhrases.forEach(word => {
-      if (cleanMsg.includes(word.toLowerCase())) {
-        console.log("✅ Matched scam phrase:", word);
-        score += 2;
-      }
-    });
-
-    score += spamLinks.some(link => cleanMsg.includes(link)) ? 3 : 0;
-
-    let label = "✅ Credible";
-    let explanationText = "Message appears neutral and safe.";
-    let colorClass = "result-green";
-
-    if (score >= 6) {
-      label = "❌ Likely Fake";
-      explanationText = "Message contains scammy keywords and suspicious links.";
-      colorClass = "result-red";
-    } else if (score >= 3) {
-      label = "⚠️ Suspicious";
-      explanationText = "Message has warning signs. Verify before sharing.";
-      colorClass = "result-yellow";
-    }
-
-    // Local AI override
     if (aiResult.flag && label === "✅ Credible") {
       label = "⚠️ AI-Flagged";
-      explanationText = "AI flagged this as potentially misleading. Review carefully.";
+      explanationText = "Simulated AI flagged this as potentially misleading. Review carefully.";
       colorClass = "result-yellow";
     }
+  }
 
-    // Update UI
-    resultBadge.textContent = label;
-    resultBadge.className = colorClass;
-    explanation.textContent = explanationText;
-    resultBox.classList.remove("hidden");
+  // Update final UI
+  resultBadge.textContent = label;
+  resultBadge.className = colorClass;
+  explanation.textContent = explanationText;
+  resultBox.classList.remove("hidden");
+  aiBox.classList.remove("hidden");
 
     // Show Local AI (Simulated)
     aiBox.innerHTML += `
@@ -167,12 +181,20 @@ document.addEventListener('DOMContentLoaded', () => {
         <p style="font-size: 0.85em; color: gray;">Raw label: ${rawLabel}</p>
       `;
 
-      // Use Hugging Face as backup flag
-      if (["spam", "scam", "toxic"].includes(rawLabel.toLowerCase()) && label === "✅ Credible") {
-        resultBadge.textContent = "⚠️ AI-Flagged";
-        resultBadge.className = "result-yellow";
-        explanation.textContent += " | ⚠️ Hugging Face flagged this as scam/spam.";
-      }
+  const hfConfidence = hfAnalysis.top.score;
+  const hfIsScam = rawLabel.toLowerCase() === "label_1" || ["scam", "spam", "toxic"].includes(rawLabel.toLowerCase());
+
+  if (hfIsScam && hfConfidence >= 0.7) {
+    label = "❌ Likely Fake";
+    explanationText = "Hugging Face AI flagged this as scam/spam with high confidence.";
+    colorClass = "result-red";
+
+    // Override UI
+    resultBadge.textContent = label;
+    resultBadge.className = colorClass;
+    explanation.textContent = explanationText;
+  }
+
     } catch (error) {
       console.error("Hugging Face API error:", error);
       aiBox.innerHTML += `<p>❌ Hugging Face API error</p>`;

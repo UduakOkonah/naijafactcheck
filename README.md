@@ -36,7 +36,7 @@ Misinformation spreads fast—especially in Nigeria where fake news about pallia
 | **JavaScript**  | Message logic, AI simulation, UI   |
 | **LocalStorage**| User accounts + message history    |
 | **Vercel**      | Deployment platform                |
-| **Gemini AI** *(coming soon)* | Text analysis simulation |
+| **Gemini AI**  | Text analysis simulation |
 | **Free JSON APIs** *(coming soon)* | For supporting fake news detection |
 
 ---
@@ -87,8 +87,4 @@ Built by Uduakobong Okonah, a #My3MTT learner and Pathway missionary passionate 
 
 🙌 Acknowledgments
 3MTT Learning Community
-
-OpenAI and Gemini teams
-
-Fact-checking partners: Dubawa, AfricaCheck, AFP FactCheck
 
