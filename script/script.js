@@ -25,7 +25,7 @@ fetch('/data/scam_phrases_nigeria_2000.json')
   .then(res => res.json())
   .then(messages => {
     messages.forEach(msg => {
-      // const result = simulateAIAnalysis(msg);
+      const result = simulateAIAnalysis(msg);
       // console.log("📩 Message:", msg);
       // console.log("🧠 AI Suggestion:", result.suggestion);
       // console.log("🔎 Confidence:", result.confidence);
