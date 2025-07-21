@@ -8,7 +8,7 @@ const loadingMsg = document.getElementById("loadingMsg");
 if (checkBtn) checkBtn.disabled = true;
 
 // Load scam phrases
-fetch('scam_phrases_nigeria_2000.json')
+fetch('/scam_phrases_nigeria_2000.json')
   .then(response => response.json())
   .then(data => {
     scamPhrases = data.phrases || [];
@@ -20,7 +20,7 @@ fetch('scam_phrases_nigeria_2000.json')
     scamPhrases = [];
   });
 
-fetch('scam_messages_nigeria.json')
+fetch('/scam_messages_nigeria.json')
   .then(res => res.json())
   .then(messages => {
     messages.forEach(msg => {
