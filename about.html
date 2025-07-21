@@ -39,7 +39,7 @@
         <h1>About NaijaFactCheck</h1>
         <br>
         <p>
-          Fake news spreads faster than truth. NaijaFactCheck was created to empower everyday Nigerians to easily verify WhatsApp messages, political claims, viral news, and scams — right from their browser.
+          Fake news spreads faster than truth. NaijaFactCheck was created to empower everyday Nigerians to easily verify WhatsApp messages, SMS spam messages, political claims, viral news, and scams — right from their browser.
         </p>
         <p>
           Using AI scoring, keyword detection, and JSON-based APIs, we simulate a smart fact-checking assistant. This project was built for the 3MTT Knowledge Showcase.
@@ -59,7 +59,7 @@
         </div>
         <div class="card">
           <h3>🛡️ Simplicity</h3>
-          <p>Anyone with a phone and internet should be able to check a message in seconds — no login or stress required.</p>
+          <p>Anyone with a phone and internet should be able to check a message in seconds.</p>
         </div>
         <div class="card">
           <h3>🤖 AI + Community</h3>
@@ -71,14 +71,25 @@
     <section class="tech-section fade-in">
       <h2>🧠 How It Works</h2>
       <p>
-        Messages are analyzed based on red-flag keywords (e.g., “Click here”, “FG palliative”), shortened links (like bit.ly), and suspicious patterns. Gemini AI (free version) and simulated API responses are used to mimic advanced features without heavy costs.
+        Messages are analyzed using two approaches:
+      </p>
+      <ul>
+        <li><strong>🔑 Keyword & Pattern Detection</strong>: We scan for common red-flag phrases like “Click here”, “FG palliative”, “free airtime”, and suspicious links (e.g., <code>bit.ly</code>, <code>wa.me</code>, <code>tinyurl.com</code>).</li>
+        <li><strong>🤖 AI Text Classification</strong>: We use a Hugging Face model (<code>cardiffnlp/twitter-roberta-base-offensive</code>) to classify messages as suspicious or not.</li>
+        <li><strong>🧪 Simulated AI Analysis</strong>: As a fallback or for faster checks, we use a fake API that mimics AI scoring based on local rules — no internet required.</li>
+      </ul>
+      <p>
+        This hybrid setup helps users detect scams quickly and reliably, even during showcase demos or in low-connectivity environments.
+        <br> But 
+        <br> "Due to model limitations, AI analysis may not detect polite or localized scam patterns. Our keyword system bridges that gap."
       </p>
     </section>
+
 
     <section class="callout-section fade-in">
       <h2>🙌 Built by a Missionary Learner</h2>
       <p>
-        Created by Uduakobong Okonah, a Nigerian missionary learner passionate about software development and using tech for truth. This is more than a project — it's a mission to fight disinformation.
+        Created by Uduakobong Okonah, a 3MTT Fellow and a Nigerian missionary learner passionate about software development and using tech for truth. This is more than a project, it's a mission to fight disinformation.
       </p>
     </section>
   </main>

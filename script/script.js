@@ -8,7 +8,7 @@ const loadingMsg = document.getElementById("loadingMsg");
 if (checkBtn) checkBtn.disabled = true;
 
 // Load scam phrases
-fetch('./data/scam_phrases_nigeria_2000.json')
+fetch('/scam_phrases_nigeria_2000.json')
   .then(response => response.json())
   .then(data => {
     scamPhrases = data.phrases || [];
@@ -20,16 +20,11 @@ fetch('./data/scam_phrases_nigeria_2000.json')
     scamPhrases = [];
   });
 
-
-  fetch('./data/scam_messages_nigeria.json')
+fetch('/scam_messages_nigeria.json')
   .then(res => res.json())
   .then(messages => {
     messages.forEach(msg => {
       const result = simulateAIAnalysis(msg);
-      console.log("📩 Message:", msg);
-      console.log("🧠 AI Suggestion:", result.suggestion);
-      console.log("🔎 Confidence:", result.confidence);
-      console.log("===========");
     });
   })
   .catch(err => console.error("Failed to load messages:", err));
@@ -178,9 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
       aiBox.innerHTML += `<p>❌ Hugging Face API error</p>`;
     }
     aiBox.classList.remove("hidden");
-
-  // After analysis is complete
-  saveToHistory(message, label, hfAnalysis?.top?.score ? (hfAnalysis.top.score * 100).toFixed(2) + "%" : "N/A");
   });
 });
 
