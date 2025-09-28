@@ -68,7 +68,7 @@ Review past analysis from your history tab
 Github Repo: https://github.com/UduakOkonah/naijafactcheck
 
 Demo Video
-[Insert link to your 4–5 minute demo video here]
+(https://www.youtube.com/watch?v=tTSgoRPbiwo)
 
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request for bug fixes, improvements, or new features.
