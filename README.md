@@ -1,90 +1,79 @@
-# 🇳🇬 NaijaFactCheck
+# NaijaFactCheck
 
-**NaijaFactCheck** is a lightweight AI-powered web tool designed to help Nigerians identify and stop the spread of fake news—especially through platforms like WhatsApp.
-
-Built for the **#My3MTT July 2025 Knowledge Showcase**, this project simulates AI analysis, promotes digital awareness, and provides fact-checking resources for everyday citizens.
-
----
-
-## 🌍 Project Purpose
-
-Misinformation spreads fast—especially in Nigeria where fake news about palliatives, giveaways, and government actions go viral quickly. This app helps users:
-
-- 🕵️ Detect suspicious or fake messages
-- 🤖 Get simulated AI insights using keyword scoring + API integration
-- 📚 Access trusted fact-checking sites like [Dubawa](https://dubawa.org) and [AfricaCheck](https://africacheck.org)
-- 📤 Report suspicious messages anonymously
-
----
-
-## 💡 Features
-
-- **Login/Signup system** (with localStorage)
-- **Fake News Analyzer** that flags dangerous keywords and links
-- **User-specific message history** stored in the browser
-- **Mobile Navigation** with animated hamburger menu
-- **Resources Page** with fact-checking tools and awareness tips
-- **Coming Soon:** Gemini AI + JSON APIs for advanced context analysis
-
----
-
-## 🧱 Tech Stack
-
-| Tech            | Description                        |
-|-----------------|------------------------------------|
-| **HTML/CSS**    | Structure and styling              |
-| **JavaScript**  | Message logic, AI simulation, UI   |
-| **LocalStorage**| User accounts + message history    |
-| **Vercel**      | Deployment platform                |
-| **Gemini AI**  | Text analysis simulation |
-| **Free JSON APIs** *(coming soon)* | For supporting fake news detection |
-
----
-
-## 🔧 Folder Structure
-
-naijafactcheck/
-│
-├── index.html # Main analyzer page
-├── login.html # Login/Signup
-├── about.html # Project mission + team
-├── resources.html # Awareness tools & tips
-├── script/
-│ └── script.js # Analyzer + nav + login logic
-├── styles/
-│ ├── basic.css # Global and page styles
-│ └── login.css # Login-specific styles
-└── README.md
+![NaijaFactCheck Logo](assets\logo.png)  
+**Your WhatsApp & SMS Scam Detector in One Click!**
 
 
----
+NaijaFactCheck is a web-based tool that helps everyday Nigerians verify WhatsApp messages, SMS spam, political claims, viral news, and scams—right from their browser. It combines keyword-based detection with AI-powered analysis to quickly flag potential fake or suspicious content.
 
-## 🚀 Upcoming AI + API Integration
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Demo Video](#demo-video)
+- [Contributing](#contributing)
+- [License](#license)
 
-We plan to integrate:
-- **Gemini Free API or client-side Gemini Web App calls**
-- **JSON-based API simulation** to mimic AI predictions
-- A **“Context-aware scanner”** that learns from common Nigerian hoaxes
+## Overview
+Fake news spreads faster than truth. NaijaFactCheck was created to empower users to identify scams and misinformation, providing a safer communication experience on WhatsApp and other messaging platforms.
 
-We'll also build:
-- A **Fake News Reporting Extension** for WhatsApp message copy-paste
-- **Community voting buttons** to allow crowdsource-based validation
+The app uses:
+- Keyword-based analysis for common Nigerian scam phrases
+- AI-based analysis via Hugging Face API
+- A simulated AI analyzer for fast, local message scoring
 
----
+## Features
+- Analyze WhatsApp or SMS messages for scams and fake content
+- Store past analyses and track scam patterns
+- User-friendly interface with login and signup options
+- Simulated AI for offline or fast checks
+- Integration with Hugging Face API for smarter analysis
 
-## 🧪 Local Setup
+## Tech Stack
+- **Frontend:** HTML, CSS, JavaScript, Vite  
+- **Backend:** Node.js, Express  
+- **Database:** LocalStorage (for saving analysis history)  
+- **AI:** Hugging Face API, simulated AI model  
 
-You can run this locally by cloning the repo and opening `index.html` in your browser.
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/UduakOkonah/naijafactcheck.git
 
-```bash
-git clone https://github.com/your-username/naijafactcheck.git
-cd naijafactcheck
+2. Navigate into the project directory:
 
-Open login.html to begin.
+cd NaijaFactCheck
 
-👩🏽‍💻 Author
-Built by Uduakobong Okonah, a #My3MTT learner and Pathway missionary passionate about ethical AI and software for social good.
+3. Install dependencies:
 
-🙌 Acknowledgments
-3MTT Learning Community
+npm install
+
+4. Start the development server:
+
+npm run dev
+
+Usage
+Open the app in your browser at http://localhost:5173
+
+Signup as an Individual or Cooperative user
+
+Paste the message you want to analyze and click “Analyze”
+
+View the result from both keyword-based and AI analysis
+
+Review past analysis from your history tab
+
+Github Repo: https://github.com/UduakOkonah/naijafactcheck
+
+Demo Video
+[Insert link to your 4–5 minute demo video here]
+
+Contributing
+Contributions are welcome! Please open an issue or submit a pull request for bug fixes, improvements, or new features.
+
+License
+This project is licensed under the MIT License.
+© 2025 Uduakobong Okonah
 

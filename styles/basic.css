@@ -73,42 +73,43 @@ a {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-
 #greetUser {
-  font-weight: 700;
-  font-size: 1.2rem;         /* larger text */
-  padding: 0.75rem 1.5rem;   /* bigger pill shape */
-  background: #d2f8d2;
+  display: block;
+  text-align: center;
+  font-weight: 900;
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  /* margin: 1rem auto; */
+  background-color: #d2f8d2;
   color: #004d00;
-  border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 100, 0, 0.15);
-  display: inline-block;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
-  margin-left: 1rem;
+  box-shadow: 0 6px 12px rgba(0, 100, 0, 0.2);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
   transition: transform 0.3s ease;
-  list-style: none;
 }
 
 #greetUser::before {
   content: "👋 ";
+  display: inline-block;
+  transform-origin: 70% 70%; /* pivot at bottom of hand */
+  animation: waveOnce 1.5s ease-in-out 0s 3; /* wave 3 times */
 }
 
-#greetUser {
-  animation: popIn 0.6s ease forwards;
+@keyframes waveOnce {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(15deg); }
+  30% { transform: rotate(-10deg); }
+  45% { transform: rotate(15deg); }
+  60% { transform: rotate(-10deg); }
+  75% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
 }
 
-@keyframes popIn {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+.logo {
+  width: 70px; 
+  height: auto;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-
 
 
 /* Hero Section */

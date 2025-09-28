@@ -8,17 +8,20 @@ const loadingMsg = document.getElementById("loadingMsg");
 if (checkBtn) checkBtn.disabled = true;
 
 // Load scam phrases
-fetch('/data/scam_phrases_nigeria_2000.json')
-  .then(response => response.json())
-  .then(data => {
-    scamPhrases = data.phrases || [];
-    checkBtn.disabled = false;
-    loadingMsg.style.display = 'none';
-  })
-  .catch(err => {
-    console.error("❌ Error loading scam phrases:", err);
-    scamPhrases = [];
-  });
+if (checkBtn && loadingMsg) {
+  fetch('/data/scam_phrases_nigeria_2000.json')
+    .then(response => response.json())
+    .then(data => {
+      scamPhrases = data.phrases || [];
+      checkBtn.disabled = false;
+      loadingMsg.style.display = 'none';
+    })
+    .catch(err => {
+      console.error("❌ Error loading scam phrases:", err);
+      scamPhrases = [];
+    });
+}
+
 
 
   fetch('/data/scam_messages_nigeria.json')

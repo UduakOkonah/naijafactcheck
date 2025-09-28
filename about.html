@@ -7,11 +7,12 @@
    <link rel="stylesheet" href="styles/about.css">
   <link rel="stylesheet" href="styles/basic.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <script src="script/script.js" defer></script>
+  <script type="module" src="script/script.js" defer></script>
 </head>
 <body>
   <header class="navbar">
-    <h1 class="logo">NaijaFactCheck</h1>
+  <!-- logo with an image -->
+  <img src="assets/logo.png" alt="NaijaFactCheck Logo" class="logo">
 
     <nav>
         <ul class="nav-links" id="navLinks">
@@ -36,14 +37,14 @@
   <main class="about-container">
     <section class="intro-section fade-in">
       <div class="intro-text">
-        <h1>About NaijaFactCheck</h1>
-        <br>
-        <p>
-          Fake news spreads faster than truth. NaijaFactCheck was created to empower everyday Nigerians to easily verify WhatsApp messages, SMS spam messages, political claims, viral news, and scams — right from their browser.
-        </p>
-        <p>
-          Using AI scoring, keyword detection, and JSON-based APIs, we simulate a smart fact-checking assistant. This project was built for the 3MTT Knowledge Showcase.
-        </p>
+      <h1>About NaijaFactCheck</h1>
+      <br>
+      <p>
+        NaijaFactCheck is a JavaScript-based web application designed to help users quickly identify fake or misleading WhatsApp messages and scams. It empowers users to verify suspicious messages directly in their browser.
+      </p>
+      <p>
+        The application uses a combination of keyword scanning, simulated AI analysis, and Hugging Face API-based AI checks to provide a reliable “fake news” evaluation. Analysis history is stored using localStorage so users can review past checks. This project was created as part of my CSE 310 Module 2 assignment to demonstrate applied programming skills, including software design, implementation, and testing.
+      </p>
       </div>
       <div class="intro-img">
         <img src="https://cdn-icons-png.flaticon.com/512/6165/6165746.png" alt="AI Detection Illustration">
@@ -51,14 +52,14 @@
     </section>
 
     <section class="mission-section fade-in">
-      <h2>🎯 Our Mission</h2>
+      <h2>Our Mission</h2>
       <div class="mission-grid">
         <div class="card">
-          <h3>👁️‍🗨️ Awareness</h3>
+          <h3>Awareness</h3>
           <p>Expose the patterns behind deceptive WhatsApp broadcasts, political propaganda, and scam trends.</p>
         </div>
         <div class="card">
-          <h3>🛡️ Simplicity</h3>
+          <h3>Simplicity</h3>
           <p>Anyone with a phone and internet should be able to check a message in seconds.</p>
         </div>
         <div class="card">
@@ -89,13 +90,13 @@
     <section class="callout-section fade-in">
       <h2>🙌 Built by a Missionary Learner</h2>
       <p>
-        Created by Uduakobong Okonah, a 3MTT Fellow and a Nigerian missionary learner passionate about software development and using tech for truth. This is more than a project, it's a mission to fight disinformation.
+        Created by Uduakobong Okonah, a BYUI Student (3MTT Fellow) and a Nigerian missionary learner passionate about software development and using tech for truth. This is more than a project, it's a mission to fight disinformation.
       </p>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 NaijaFactCheck | Made with 💚 for 3MTT Showcase</p>
+    <p>Made with 💚 by Uduakobong Okonah | #BYUI Module02 2025</p>
   </footer>
 </body>
 </html>
