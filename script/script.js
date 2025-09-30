@@ -86,18 +86,22 @@ document.addEventListener('DOMContentLoaded', () => {
       "reward.ng", "quicklink.click", "joinnow.site", "promo.win", "fakeclaim.net"
     ];
 
-      // Score-based detection
-  let score = 0;
-  const cleanMsg = message.replace(/[^\w\s₦]/gi, '').toLowerCase();
+let score = 0;
+const cleanMsg = message.replace(/[^\w\s₦]/gi, '').toLowerCase();
 
-  scamPhrases.forEach(word => {
-    if (cleanMsg.includes(word.toLowerCase())) {
-      console.log("✅ Matched scam phrase:", word);
-      score += 2;
-    }
-  });
+// Recursive function to scan scam phrases
+function recursiveScan(msg, phrases, index = 0) {
+  if (index >= phrases.length) return 0; // base case: end of array
+  let points = 0;
+  if (msg.includes(phrases[index].toLowerCase())) {
+    console.log("✅ Matched scam phrase:", phrases[index]);
+    points = 2; // add score for match
+  }
+  return points + recursiveScan(msg, phrases, index + 1); // recursive call
+}
 
-  score += spamLinks.some(link => cleanMsg.includes(link)) ? 3 : 0;
+// Use recursive scan
+score += recursiveScan(cleanMsg, scamPhrases);
 
   let label = "✅ Credible";
   let explanationText = "Message appears neutral and safe.";

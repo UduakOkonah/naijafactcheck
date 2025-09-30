@@ -30,6 +30,8 @@ The app uses:
 - User-friendly interface with login and signup options
 - Simulated AI for offline or fast checks
 - Integration with Hugging Face API for smarter analysis
+- Recursive scanning for scam keywords (satisfies recursion requirement)
+- Exception handling for API and localStorage access
 
 ## Tech Stack
 - **Frontend:** HTML, CSS, JavaScript, Vite  
